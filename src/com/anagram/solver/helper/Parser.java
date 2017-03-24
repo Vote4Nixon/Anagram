@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.anagram.solver.option.ContainOption;
 import com.anagram.solver.option.DictionaryOption;
+import com.anagram.solver.option.EndOption;
 import com.anagram.solver.option.ExitOption;
 import com.anagram.solver.option.HelpOption;
 import com.anagram.solver.option.InputOption;
 import com.anagram.solver.option.Option;
 import com.anagram.solver.option.OptionType;
 import com.anagram.solver.option.PatternOption;
+import com.anagram.solver.option.StartOption;
 
 public class Parser {
 	public static List<Option> parse(String input) {
@@ -55,6 +58,15 @@ public class Parser {
 				break;
 			case INPUT:
 				option = new InputOption(value);
+				break;
+			case START:
+				option = new StartOption(value);
+				break;
+			case END:
+				option = new EndOption(value);
+				break;
+			case CONTAIN:
+				option = new ContainOption(value);
 				break;
 			case PATTERN:
 				option = new PatternOption(value);

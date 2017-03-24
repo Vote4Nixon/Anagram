@@ -14,7 +14,7 @@ public class Solver {
 	private static Map<String, Boolean> hasBeenDone;
 	private static String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
 	
-	public static WordResult solve(String input, String pattern) throws IOException {
+	public static WordResult solve(String input, String start, String end, String contain, String pattern) throws IOException {
 		hasBeenDone = new HashMap<>();
 		WordResult result = new WordResult();
 		
@@ -49,12 +49,22 @@ public class Solver {
 		}
 		
 		anagrams.stream().forEach(w -> {
-			if(pattern != null && pattern.length() > 0) {
-				if(w.matches(pattern)) {
-					result.add(w);
-				}
+			boolean valid = true;
+
+			if(start != null && start.length() > 0) {
+				valid &= w.startsWith(start);
 			}
-			else {
+			if(end != null && end.length() > 0) {
+				valid &= w.endsWith(end);
+			}
+			if(contain != null && contain.length() > 0) {
+				valid &= w.contains(contain);
+			}
+			if(pattern != null && pattern.length() > 0) {
+				valid &= w.matches(pattern);
+			}
+			
+			if(valid) {
 				result.add(w);
 			}
 		});
