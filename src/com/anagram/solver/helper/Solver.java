@@ -77,7 +77,7 @@ public class Solver {
 			return new HashSet<>();
 		}
 
-		WordDictionary dict = Builder.build(DictionaryType.defaultDict());
+		WordDictionary dict = Builder.build(DictionaryType.defaultType());
 		Set<String> anagrams = dict.get(input);
 		
 		for(int i = 0; i < input.length(); i++) {

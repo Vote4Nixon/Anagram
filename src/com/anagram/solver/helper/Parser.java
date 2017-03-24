@@ -29,20 +29,29 @@ public class Parser {
 			OptionType type = null;
 			String value = null;
 			Option option = null;
+			String inputFlag = null;
+			String inputValue = null;
 			
-			String[] parsedOptionInput = optionInput.split(":");
+			if(optionInput != null && optionInput.contains(":")) {
+				inputFlag = optionInput.substring(0, optionInput.indexOf(":"));
+				inputValue = optionInput.substring(optionInput.indexOf(":") + 1);
+			}
+			else if(optionInput != null) {
+				inputFlag = optionInput;
+				inputValue = null;
+			}
 			
-			if(parsedOptionInput.length >= 1) {
-				if(parsedOptionInput[0].startsWith("-")) {
-					type = OptionType.find(parsedOptionInput[0]);
+			if(inputFlag != null) {
+				if(inputFlag.startsWith("-")) {
+					type = OptionType.find(inputFlag);
 				}
 				else {
 					type = OptionType.INPUT;
-					value = parsedOptionInput[0];
+					value = inputFlag;
 				}
 				
-				if(value == null && parsedOptionInput.length >= 2) {
-					value = parsedOptionInput[1];
+				if(value == null && inputValue != null) {
+					value = inputValue;
 				}
 			}
 			

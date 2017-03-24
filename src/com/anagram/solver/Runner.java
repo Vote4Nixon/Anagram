@@ -11,6 +11,21 @@ public class Runner {
 	public static void main(String[] args) throws IOException {		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		
+		String optionInput = "-p:([a-z]*[aeiou][a-z]*){4,}";
+		String inputFlag;
+		String inputValue;
+		
+		if(optionInput.contains(":")) {
+			inputFlag = optionInput.substring(0, optionInput.indexOf(":"));
+			inputValue = optionInput.substring(optionInput.indexOf(":") + 1);
+		}
+		else {
+			inputFlag = optionInput;
+			inputValue = null;
+		}
+		
+		System.out.println(inputFlag + " ; " + inputValue);
+		
 		System.out.print("Anagram Solver!  Type a series of letters or -h for help\n\nInput: ");
 		
 		while(true) {

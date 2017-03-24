@@ -7,7 +7,7 @@ public enum DictionaryType {
 	TWL("twl"),
 	SOWPODS("sowpods");
 	
-	private static DictionaryType defaultDict;
+	private static DictionaryType defaultType;
 	
 	private String title;
 	
@@ -26,14 +26,14 @@ public enum DictionaryType {
 	public static DictionaryType find(String title) {
 		return valuesAsList().stream()
 				.filter(t -> t.title.equals(title))
-				.findAny().get();
+				.findAny().orElse(null);
 	}
 	
-	public static void setDefaultDict(DictionaryType newDefaultDict) {
-		defaultDict = newDefaultDict;
+	public static void setDefaultType(DictionaryType newDefaultDict) {
+		defaultType = newDefaultDict;
 	}
 	
-	public static DictionaryType defaultDict() {
-		return defaultDict == null ? TWL : defaultDict;
+	public static DictionaryType defaultType() {
+		return defaultType == null ? TWL : defaultType;
 	}
 }

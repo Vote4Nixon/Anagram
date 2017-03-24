@@ -6,12 +6,12 @@ import java.util.List;
 public enum OptionType {
 	INPUT(null, "<input>", "A series of letters to search anagrams for.  You may use 2-10 letters, including up to 2 wildcards denoted by ?.", "abc? -- find all words containing a, b, c, and any letter a-z"),
 	START("-s", "<letters>", "Show only words that start with the given letters.", "arthet -s:th -- find words from the input 'arthet' that start with 'th'"),
-	END("-e", "<letters>", "Show only words that end with the given letters.", "dream -e:er -- find words from the input 'dream' that end with 'er'"),
+	END("-e", "<letters>", "Show only words that end with the given letters.", "dream -e:ed -- find words from the input 'dream' that end with 'ed'"),
 	CONTAIN("-c", "<letters>", "Show only words that contain the given letters.", "abcdef -c:bad -- find words from the input 'abcdef' that contain 'bad'"),
-	PATTERN("-p", "<regex>", "Filter words by matching them against a Java Regular Expression (see https://docs.oracle.com/javase/tutorial/essential/regex/index.html).", "ademiooah? -p:.*[aeiou]{3,}.* -- find words from the input 'ademiooah?' that contain at least 3 vowels"),
+	PATTERN("-p", "<regex>", "Filter words by matching them against a Java Regular Expression (see https://docs.oracle.com/javase/tutorial/essential/regex/index.html).", "ademiooah? -p:([a-z]*[aeiou][a-z]*){4,} -- find words from the input 'ademiooah?' with at least 4 vowels"),
 	DICTIONARY("-d", "[twl|sowpods]", "Sets the default dictionary, either TWL (American) or SOWPODS (International).  The starting dictionary is TWL.", "-d:sowpods"),
 	HELP("-h", null, "Display the help menu.", null),
-	EXIT("-e", null, "Exit the program.", null);
+	EXIT("-x", null, "Exit the program.", null);
 	
 	private String flag;
 	private String input;
@@ -32,7 +32,7 @@ public enum OptionType {
 	public static OptionType find(String flag) {
 		return valuesAsList().stream()
 				.filter(ot -> ot.flag == null ? (flag == null || flag == "") : ot.flag.equals(flag))
-				.findAny().get();
+				.findAny().orElse(null);
 	}
 	
 	public String header() {

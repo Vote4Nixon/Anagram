@@ -42,7 +42,7 @@ public class Processor {
 			String dict = optionValue(options, OptionType.DICTIONARY);
 			
 			if(dict != null) {
-				DictionaryType.setDefaultDict(DictionaryType.find(dict));
+				DictionaryType.setDefaultType(DictionaryType.find(dict));
 			}
 			
 			String input = optionValue(options, OptionType.INPUT);
